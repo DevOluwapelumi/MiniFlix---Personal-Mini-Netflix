@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="upload.css">
+    <title>Upload...</title>
+</head>
+<body>
+
+
+        <div class="container">
+        <div class="row mt-5">
+            <div class="col-sm-12 col-lg-6 mx-auto shadow py-5 my-4">
+                <marquee behavior="" direction="">
+                <h1 class="text-center">Upload Your Movie Here...</h1>
+            </marquee>
+                <form action="" id="myForm">
+                    <div id="alertDiv"></div>
+                    <input type="text" placeholder="Movie Title" id="movieTitle" class="form-control my-5">
+                    <input type="text" placeholder="Movie Duration" id="movieDuration" class="form-control my-5">
+                    <input type="text" placeholder="Movie Genre" id="movieGenre" class="form-control my-5">
+                    <input type="text" placeholder="Movie Cast" id="movieCast" class="form-control my-5">
+                    <input type="text" placeholder="Movie Synopsis" id="movieSynopsis" class="form-control my-5">
+                    <input type="file" id="movieFile" accept="" class="form-control-file my-5">
+                    <div id="progressBar">
+                    </div>
+                    <button class="btn btn-primary w-100" id="uploadBtn" type="button">Upload Your Movie</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+
+    <script type="module">  
+        // Save the info to the database
+        // Upload the movie to the firebase storage
+         // Imports
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
+        import { getAuth, onAuthStateChanged,signOut } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
+        import { getDatabase,ref,set,onValue } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
+        import { getStorage,ref as stRef,uploadBytesResumable,getDownloadURL} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-storage.js"
+
+             const firebaseConfig = {
+        apiKey: "AIzaSyDGhKCoknwAj8myT2FgGcCyEzwg1KPl5ys",
+        authDomain: "mininetflix-75f03.firebaseapp.com",
+        databaseURL: "https://mininetflix-75f03-default-rtdb.firebaseio.com",
+        projectId: "mininetflix-75f03",
+        storageBucket: "mininetflix-75f03.appspot.com",
+        messagingSenderId: "31056050926",
+        appId: "1:31056050926:web:9cfe547608e65d926751ff"
+        };
+    
+        // Global Variable Declarations
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth();
+        const database = getDatabase();
+        const storage = getStorage()
+
+        let movieIndex = 0
+        uploadBtn.addEventListener("click",()=>{
+            let file = movieFile.files[0]
+            let filename = file.name
+            let movie = {
+                title : movieTitle.value,
+                duration : movieDuration.value,
+                genre : movieGenre.value,
+                cast: movieCast.value,
+                synopsis : movieSynopsis.value,
+                movieName : filename
+            }
+            // Clear the previous inputs
+            myForm.reset()
+            // Save the info into the database
+            let movieRef = ref(database,`allMovies/${movieIndex}`)
+            set(movieRef,movie)
+            console.log(movie)
+            // Upload the movie to firebase storage
+            let movieStRef = stRef(storage,`${filename}`)
+            const uploadTask = uploadBytesResumable(movieStRef,file)
+            uploadTask.on("state-changed",(snapshot)=>{
+                let percentageUpload = Math.round((snapshot.bytesTransferred/snapshot.totalBytes)*100)
+                // Add a progress bar and an alert
+                progressBar.innerHTML = `
+                <div class="progress" >
+                    <div 
+                        class="progress-bar progress-bar-striped progress-bar-animated" 
+                        role="progressbar" 
+                        style="width: ${percentageUpload}%;" 
+                        aria-valuenow="${percentageUpload}" 
+                        aria-valuemin="0" 
+                        aria-valuemax="100"
+                        >${percentageUpload}%
+                    </div>
+                </div>
+               
+                `
+            },
+            (error)=>{
+                // in case the upload fails
+                console.log(err)
+            },
+            ()=>{
+                // handle successful uploads
+                console.log("upload is complete")
+                progressBar.innerHTML = ""
+                alertDiv.innerHTML = `
+                <p class="text-center">Upload Successful!</p>
+                `
+                alertDiv.className = "alert alert-success"
+                setTimeout(()=>{
+                    alertDiv.innerHTML = ""
+                    alertDiv.className = ""
+                },3000)
+                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL)=>{
+                    console.log(downloadURL)
+                })
+                window.location.href = "netflix.html"
+            }
+            )
+        })
+        let allMovieRef = ref(database,"allMovies")
+        onValue(allMovieRef,(snapshot)=>{
+            let data = snapshot.val()
+            if(data){             
+                movieIndex = data.length
+            }else{
+                movieIndex = 0
+            }
+        })
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+.card {
+    display: flex;
+    width: 300px;
+    height:300px;
+}
+.card .vid {
+    background-size: cover;
+}
+/* .time {
+    margin-left: 120px;
+    margin-top: -50px;
+}
+.card-title {
+    margin-top: -40px;
+} */
+.card .vid {
+    overflow: hidden;
+    margin: 0;
+  }
+.card:hover .vid {
+    transform: scale(1.1);
+    transition-duration: 2.0s;
+    /* border-radius: 20px; */
+  }
+  

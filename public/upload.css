@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+body {
+background: red;
+animation: mymove 5s infinite;
+}
+.container {
+    margin-top: 100px;
+}
+
+@keyframes mymove {
+from {background-color: red;}
+to {background-color: blue;}
+}
+/* @media screen and (max-width: 400px) {
+    .container {
+        width: 300px !important;
+        height: 630px;
+        background: red;
+        animation: mymove 5s infinite;
+        }
+} */

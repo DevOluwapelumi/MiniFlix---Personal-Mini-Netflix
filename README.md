@@ -10,3 +10,5 @@ Streaming Capabilities: Enjoy buffer-free streaming of your media directly from 
 User Profiles: Create multiple user profiles for your MiniFlix installation. Each user can have their own watchlist and preferences, ensuring a personalized experience for everyone in your household.
 Search and Discovery: Quickly find content with MiniFlix's powerful search and recommendation engine. Discover new favorites and get tailored suggestions based on your viewing history.
 Multi-Device Compatibility: MiniFlix is designed to work seamlessly on a variety of devices, including desktops, laptops, tablets, and mobile phones. Stream your content from anywhere, anytime.
+Security: Rest easy knowing your media library is secure on GitHub. MiniFlix implements robust authentication and authorization mechanisms to protect your content.
+Customization: Tailor MiniFlix to your liking by tweaking settings and appearance. Change themes, adjust playback settings, and more to create your perfect streaming environment.

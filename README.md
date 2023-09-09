@@ -12,3 +12,5 @@ Search and Discovery: Quickly find content with MiniFlix's powerful search and r
 Multi-Device Compatibility: MiniFlix is designed to work seamlessly on a variety of devices, including desktops, laptops, tablets, and mobile phones. Stream your content from anywhere, anytime.
 Security: Rest easy knowing your media library is secure on GitHub. MiniFlix implements robust authentication and authorization mechanisms to protect your content.
 Customization: Tailor MiniFlix to your liking by tweaking settings and appearance. Change themes, adjust playback settings, and more to create your perfect streaming environment.
+Open-Source: MiniFlix is open-source, allowing developers to contribute to its growth and customize it to suit their needs. Collaborate with the community to enhance the platform's features.
+Easy Deployment: Deploy MiniFlix on your own GitHub repository with simple setup instructions. The system is built to be scalable, making it suitable for personal use or small-scale streaming projects.

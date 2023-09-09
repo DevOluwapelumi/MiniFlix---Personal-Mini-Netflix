@@ -6,3 +6,5 @@ Key Features:
 
 User-Friendly Interface: MiniFlix boasts an intuitive and user-friendly interface that makes navigation a breeze. Easily browse through your library, search for content, and create personalized playlists.
 Content Management: Organize your media library with ease. Upload your favorite movies and TV shows, complete with metadata like titles, descriptions, and cover art. MiniFlix automatically organizes your content into categories for seamless browsing.
+Streaming Capabilities: Enjoy buffer-free streaming of your media directly from GitHub. MiniFlix uses efficient streaming protocols to deliver your content in high quality without interruptions.
+User Profiles: Create multiple user profiles for your MiniFlix installation. Each user can have their own watchlist and preferences, ensuring a personalized experience for everyone in your household.
